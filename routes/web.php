@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumsController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -36,9 +37,11 @@ Route::get('/dashboard', function () {
 
 
 // topページ表示
-Route::get('/', function () {
-    return view('top');
-})->name('top');
+// Route::get('/', function () {
+//     return view('top');
+// })->name('top');
+
+Route::get('/', [AlbumsController::class, 'index'])->name('album.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
