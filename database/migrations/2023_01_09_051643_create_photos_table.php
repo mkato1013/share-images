@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -19,21 +20,24 @@ return new class extends Migration
             $table->text('description')->comment('画像説明');
             $table->unsignedBigInteger('album_id')->comment('アルバムID');
             $table->timestamps();
-            $table->tinyInteger('is_private')->comment('外部非公開画像フラグ');
+            $table->tinyInteger('is_private')->default(0)->comment('外部非公開画像フラグ');
             $table->unsignedBigInteger('user_id')->comment('投稿者ID');
+            $table->string('extension', 4)->comment('拡張子');
 
             $table->foreign('album_id')
-            ->references('id')
-            ->on('albums')
-            ->cascadeOnDelete()
-            ->cascadeOnUpdate();
+                ->references('id')
+                ->on('albums')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
 
             $table->foreign('user_id')
-            ->references('id')
-            ->on('users')
-            ->cascadeOnDelete()
-            ->cascadeOnUpdate();
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
         });
+
+        DB::statement("ALTER TABLE photos COMMENT '画像テーブル'");
     }
 
     /**
