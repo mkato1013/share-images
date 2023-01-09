@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id()->comment('アルバムID');
             $table->string('name')->comment('アルバム名');
             $table->timestamps();
-            $table->tinyInteger('is_private')->comment('外部非公開アルバムフラグ');
+            $table->tinyInteger('is_private')->default(0)->comment('外部非公開アルバムフラグ');
             $table->unsignedBigInteger('user_id')->comment('作成者ID');
 
             $table->foreign('user_id')
