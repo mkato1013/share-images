@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Album extends Model
 {
@@ -37,10 +38,39 @@ class Album extends Model
         //
     ];
 
+    /**
+     * 一件取得
+     */
     public static function getList()
     {
         $albums = Album::all();
-        // dd($albums);
         return $albums;
+    }
+
+    /**
+     * 一覧取得
+     */
+    public static function getOne($id)
+    {
+        $album = Album::find($id);
+        return $album;
+    }
+
+    /**
+     * 登録・更新
+     */
+    public static function upsert($request, $id = null)
+    {
+        if ($id) {
+            // 更新
+
+        } else {
+            // 登録
+            $instance = new Album();
+            $instance->name = $request->name;
+            $instance->is_private = $request->is_private;
+            $instance->user_id = Auth::id();
+            $instance->save();
+        }
     }
 }
