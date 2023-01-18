@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use Illuminate\Http\Request;
 
 class AlbumsController extends Controller
@@ -13,7 +14,14 @@ class AlbumsController extends Controller
      */
     public function index()
     {
-        return view('album.index');
+        $albums = Album::getList();
+
+        return view('album.index', [
+            'albums' => $albums,
+        ]);
+
+        // こっちでもいい
+        // return view('album.index', compact('albums'));
     }
 
     /**

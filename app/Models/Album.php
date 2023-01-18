@@ -36,4 +36,11 @@ class Album extends Model
     protected $casts = [
         //
     ];
+
+    public static function getList()
+    {
+        $albums = Album::all();
+        // dd($albums);
+        return $albums;
+    }
 }
