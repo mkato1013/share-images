@@ -41,12 +41,21 @@ Route::get('/dashboard', function () {
 //     return view('top');
 // })->name('top');
 
-Route::get('/', [AlbumsController::class, 'index'])->name('album.index');
-
+// アルバム
+Route::get('/', [AlbumsController::class, 'index'])->name('album.index'); // 一覧取得
+Route::get('/album/{id}', [AlbumsController::class, 'show'])->name('album.show'); // 一件取得
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/album', [AlbumsController::class, 'create'])->name('album.create'); // 作成
+    Route::patch('/album/{id}', [AlbumsController::class, 'edit'])->name('album.edit'); // 編集
+    Route::patch('/album/{id}', [AlbumsController::class, 'update'])->name('album.update'); // 更新
+    Route::delete('/album/{id}', [AlbumsController::class, 'destroy'])->name('album.destroy'); // 削除
+});
+
+// ユーザー情報
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit'); // 編集
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update'); // 更新
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); // 削除
 });
 
 require __DIR__ . '/auth.php';
