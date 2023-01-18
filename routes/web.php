@@ -46,8 +46,9 @@ Route::get('/', [AlbumsController::class, 'index'])->name('album.index'); // 一
 Route::get('/album/{id}', [AlbumsController::class, 'show'])->name('album.show'); // 一件取得
 Route::middleware('auth')->group(function () {
     Route::get('/album', [AlbumsController::class, 'create'])->name('album.create'); // 作成
-    Route::patch('/album/{id}', [AlbumsController::class, 'edit'])->name('album.edit'); // 編集
-    Route::patch('/album/{id}', [AlbumsController::class, 'update'])->name('album.update'); // 更新
+    Route::post('/album', [AlbumsController::class, 'store'])->name('album.store'); // 登録
+    Route::get('/album/edit/{id}', [AlbumsController::class, 'edit'])->name('album.edit'); // 編集
+    Route::post('/album/{id}', [AlbumsController::class, 'update'])->name('album.update'); // 更新
     Route::delete('/album/{id}', [AlbumsController::class, 'destroy'])->name('album.destroy'); // 削除
 });
 
