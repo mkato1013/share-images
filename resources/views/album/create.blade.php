@@ -1,0 +1,51 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Album') }}
+
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <form action="/album" method="post">
+                @csrf
+                <input type="text" name="name" maxlength=100 placeholder="name" style="width:50%;"/>
+                <br/>
+                <br/>
+                {{-- valueで送る値を指定 --}}
+                <input type="radio" name="is_private" value=0 checked/> 公開
+                <input type="radio" name="is_private" value=1 /> 非公開
+                <br/>
+                <br/>
+                <input type="submit" value="作成">
+            </form>
+
+            {{-- <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    {{ $album['name'] }}
+                </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    {{ $album['name'] }}
+                </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    {{ $album['name'] }}
+                </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    {{ $album['name'] }}
+                </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    {{ $album['name'] }}
+                </div>
+            </div> --}}
+        </div>
+    </div>
+</x-app-layout>
