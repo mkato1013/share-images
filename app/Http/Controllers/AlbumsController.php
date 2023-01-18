@@ -19,9 +19,6 @@ class AlbumsController extends Controller
         return view('album.index', [
             'albums' => $albums,
         ]);
-
-        // こっちでもいい
-        // return view('album.index', compact('albums'));
     }
 
     /**
@@ -31,7 +28,7 @@ class AlbumsController extends Controller
      */
     public function create()
     {
-        //
+        return view('album.create');
     }
 
     /**
@@ -42,7 +39,9 @@ class AlbumsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Album::upsert($request);
+        // redirect(route('album.index'));
+        return redirect()->route('album.index');
     }
 
     /**
@@ -53,7 +52,11 @@ class AlbumsController extends Controller
      */
     public function show($id)
     {
-        //
+        $album = Album::getOne($id);
+
+        return view('album.show', [
+            'album' => $album,
+        ]);
     }
 
     /**
