@@ -39,8 +39,11 @@ class AlbumsController extends Controller
      */
     public function store(Request $request)
     {
+        // 登録
         Album::upsert($request);
-        // redirect(route('album.index'));
+        
+        // 画像S3保存
+
         return redirect()->route('album.index');
     }
 

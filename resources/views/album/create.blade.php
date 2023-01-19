@@ -18,34 +18,11 @@
                 <input type="radio" name="is_private" value=1 /> 非公開
                 <br/>
                 <br/>
+                アルバムアイコン：<input type="file" name="icon">
+                <br/>
+                <br/>
                 <input type="submit" value="作成">
             </form>
-
-            {{-- <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ $album['name'] }}
-                </div>
-            </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ $album['name'] }}
-                </div>
-            </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ $album['name'] }}
-                </div>
-            </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ $album['name'] }}
-                </div>
-            </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ $album['name'] }}
-                </div>
-            </div> --}}
         </div>
     </div>
 </x-app-layout>

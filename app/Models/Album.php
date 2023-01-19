@@ -18,6 +18,8 @@ class Album extends Model
     protected $fillable = [
         'name',
         'is_private',
+        'icon',
+        'extension',
     ];
 
     /**
@@ -70,6 +72,12 @@ class Album extends Model
             $instance->name = $request->name;
             $instance->is_private = $request->is_private;
             $instance->user_id = Auth::id();
+            if (isset($request->icon)) {
+                // ファイル情報取得
+                $file = pathinfo($request->icon);
+                $instance->icon = $file['filename'];
+                $instance->extension = $file['extension'];
+            }
             $instance->save();
         }
     }
