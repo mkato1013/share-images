@@ -20,8 +20,8 @@ class AlbumSeeder extends Seeder
         for ($i = 0; $i < 3; $i++) {
             DB::table('albums')->insert([
                 'name' => 'アルバム' . $i,
-                'create_at' => date("Y-m-d H:i:s"),
-                'update_at' => date("Y-m-d H:i:s"),
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
                 'is_private' => 0,
                 'user_id' => User::find($i + 1)->id,
             ]);
