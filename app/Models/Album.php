@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class Album extends Model
 {
@@ -76,9 +77,24 @@ class Album extends Model
                 // ファイル情報取得
                 $file = pathinfo($request->icon);
                 $instance->icon = $file['filename'];
-                $instance->extension = $file['extension'];
+                $extension = pathinfo($_FILES['icon']['name'], PATHINFO_EXTENSION);
+                $instance->extension = $extension;
+
+                // // 画像S3保存
+                // $file = $request->file('icon');
+                // // 画像パス
+                // $image_path = '/album' . '/' . $instance['id'];
+                // Storage::disk('s3')->put('/', $file);
             }
             $instance->save();
+            if (isset($request->icon)) {
+                // 画像S3保存
+                $file = $request->file('icon');
+                // 画像パス
+                $image_path = '/album';
+                // $image_path = '/album' . '/' . $instance['id'] . '/' . 'icon' . '.' . $extension;
+                Storage::disk('s3')->put($image_path, $file, 'public');
+            }
         }
     }
 }
