@@ -52,7 +52,7 @@ class Album extends Model
     }
 
     /**
-     * 一覧取得
+     * 一件取得
      */
     public static function getOne($id)
     {
@@ -74,42 +74,22 @@ class Album extends Model
             $instance->name = $request->name;
             $instance->is_private = $request->is_private;
             $instance->user_id = Auth::id();
-            // if (isset($request->icon)) {
-            //     // 画像ファイル情報取得
-            //     // $instance->icon = 'icon';
-            //     $extension = pathinfo($_FILES['icon']['name'], PATHINFO_EXTENSION);
-            //     $instance->extension = $extension;
-            // }
             $instance->save();
             if (isset($request->icon)) {
                 // 画像ファイル情報取得
-                // $instance->icon = 'icon';
                 $extension = pathinfo($_FILES['icon']['name'], PATHINFO_EXTENSION);
                 $instance->extension = $extension;
-                // $path = Storage::disk('s3')->put('/', $image, 'public');
-                // $post->image = Storage::disk('s3')->url($path);
 
                 // 画像S3保存
                 $file = $request->file('icon');
                 $image_path = '/album' . '/' . $instance['id'];
                 $image_name = 'icon' . '.' . $extension;
-
-                // Storage::putFileAs(
-                //     $image_path,
-                //     $file,
-                //     $image_name
-                // );
-
-
-                $icon_path = Storage::putFileAs(
+                $icon_info = Storage::putFileAs(
                     $image_path,
                     $file,
                     $image_name
                 );
-
-                $instance->icon = Storage::url($icon_path);
-
-                // dd($instance);
+                $instance->icon = Storage::url($icon_info);
             }
             $instance->update();
             // 二重送信防止
