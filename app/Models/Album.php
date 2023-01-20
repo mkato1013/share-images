@@ -74,28 +74,44 @@ class Album extends Model
             $instance->name = $request->name;
             $instance->is_private = $request->is_private;
             $instance->user_id = Auth::id();
-            if (isset($request->icon)) {
-                // 画像ファイル情報取得
-                $instance->icon = 'icon';
-                $extension = pathinfo($_FILES['icon']['name'], PATHINFO_EXTENSION);
-                $instance->extension = $extension;
-            }
+            // if (isset($request->icon)) {
+            //     // 画像ファイル情報取得
+            //     // $instance->icon = 'icon';
+            //     $extension = pathinfo($_FILES['icon']['name'], PATHINFO_EXTENSION);
+            //     $instance->extension = $extension;
+            // }
             $instance->save();
             if (isset($request->icon)) {
+                // 画像ファイル情報取得
+                // $instance->icon = 'icon';
+                $extension = pathinfo($_FILES['icon']['name'], PATHINFO_EXTENSION);
+                $instance->extension = $extension;
+                // $path = Storage::disk('s3')->put('/', $image, 'public');
+                // $post->image = Storage::disk('s3')->url($path);
+
                 // 画像S3保存
                 $file = $request->file('icon');
-                // 画像パス
                 $image_path = '/album' . '/' . $instance['id'];
-                // $image_path = '/album' . '/' . $instance['id'] . '/' . 'icon' . '.' . $extension;
-                // Storage::disk('s3')->put('/album', $file, 'public');
-            
-                // Log::info("message");
-                Storage::putFileAs(
+                $image_name = 'icon' . '.' . $extension;
+
+                // Storage::putFileAs(
+                //     $image_path,
+                //     $file,
+                //     $image_name
+                // );
+
+
+                $icon_path = Storage::putFileAs(
                     $image_path,
-                    $request->file('icon'),
-                    'icon' . '.' . $extension
+                    $file,
+                    $image_name
                 );
+
+                $instance->icon = Storage::url($icon_path);
+
+                // dd($instance);
             }
+            $instance->update();
             // 二重送信防止
             $request->session()->regenerateToken();
         }

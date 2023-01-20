@@ -15,12 +15,13 @@
                 <div class="p-6 text-gray-900">
                     @foreach ($albums as $album)
                         {{-- <a href="{{ route('album.show', ['id' => $album['id']]) }}"> --}}
-                            @if (isset($album['icon']))
-                                {{ $album['icon'] }}
-                            @else
-                                <img src="{{ asset('image/noimage.jpeg') }}" alt="" border=5>
-                            @endif
-                            <a href="{{ route('album.show', ['id' => $album['id']]) }}">{{ $album['name'] }}</a>
+                        @if (isset($album['icon']))
+                            <img src="{{ $album['icon'] }}" alt="プロフィール画像">
+                            {{-- {{ $album['icon'] }} --}}
+                        @else
+                            <img src="{{ asset('image/noimage.jpeg') }}" alt="" border=5>
+                        @endif
+                        <a href="{{ route('album.show', ['id' => $album['id']]) }}">{{ $album['name'] }}</a>
                         {{-- </a> --}}
                         {{-- <br /> --}}
                     @endforeach
