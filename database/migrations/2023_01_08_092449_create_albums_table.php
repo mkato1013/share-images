@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
             $table->tinyInteger('is_private')->default(0)->comment('外部非公開アルバムフラグ');
             $table->unsignedBigInteger('user_id')->comment('作成者ID');
-            $table->string('icon')->nullable()->comment('アルバムアイコン');
+            $table->string('icon')->nullable()->comment('アルバムアイコンurl');
             $table->string('extension')->nullable()->comment('アイコン拡張子');
 
             $table->foreign('user_id')
