@@ -22,8 +22,8 @@ return new class extends Migration
             $table->timestamps();
             $table->tinyInteger('is_private')->default(0)->comment('外部非公開画像フラグ');
             $table->unsignedBigInteger('user_id')->comment('投稿者ID');
-            $table->string('photo_img')->comment('投稿画像');
-            $table->string('extension', 4)->comment('拡張子');
+            $table->string('photo_img')->nullable()->comment('投稿画像');
+            $table->string('extension', 4)->nullable()->comment('拡張子');
 
             $table->foreign('album_id')
                 ->references('id')

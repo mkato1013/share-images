@@ -31,7 +31,10 @@ class PhotoController extends Controller
      */
     public function create($album_id)
     {
-        return view('photo.create');
+        $album = Album::find($album_id);
+        return view('photo.create', [
+            'album' => $album,
+        ]);
     }
 
     /**
@@ -40,12 +43,12 @@ class PhotoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $album_id)
     {
         // 登録
-        Photo::upsert($request);
+        Photo::upsert($request, $album_id);
 
-        return redirect()->route('album.index');
+        return redirect()->route('photo.index', ['album_id' => $album_id]);
     }
 
     /**
