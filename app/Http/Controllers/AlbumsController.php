@@ -43,15 +43,6 @@ class AlbumsController extends Controller
     {
         // 登録
         Album::upsert($request);
-        // 画像S3保存
-        $file = $request->file('icon');
-        Storage::disk('s3')->put('/', $file);
-
-        // $image = $request->file('icon');
-        // dd($image);
-        // $image = $request->file('file');
-        // // バケットフォルダへアップロード
-        // $path = Storage::disk('s3')->put('test', $image, 'public');
 
         return redirect()->route('album.index');
     }
