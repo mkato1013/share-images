@@ -14,11 +14,11 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    @auth
+                    {{-- @auth
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    @endauth
+                    @endauth --}}
                 </div>
             </div>
 
@@ -67,7 +67,7 @@
             @if (Route::has('login'))
             <div class="hidden items-center px-6 sm:flex">
                  @auth
-                 <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 ">{{ __('Dashboard') }}</a>
+                 {{-- <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 ">{{ __('Dashboard') }}</a> --}}
                  @else
                  <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 ">{{ __('Login') }}</a>
 
@@ -95,11 +95,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            @auth
+            {{-- @auth
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            @endauth
+            @endauth --}}
         </div>
 
         <!-- Responsive Settings Options -->

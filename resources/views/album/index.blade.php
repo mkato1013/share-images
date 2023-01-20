@@ -14,16 +14,15 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     @foreach ($albums as $album)
-                        {{-- <a href="{{ route('album.show', ['id' => $album['id']]) }}"> --}}
                         @if (isset($album['icon']))
-                            <img src="{{ $album['icon'] }}" alt="プロフィール画像">
-                            {{-- {{ $album['icon'] }} --}}
+                            <img src="{{ $album['icon'] }}" alt="アルバムアイコン" width="30%" height="20%">
                         @else
-                            <img src="{{ asset('image/noimage.jpeg') }}" alt="" border=5>
+                            <img src="{{ asset('image/noimage.jpeg') }}" alt="noimage" width="30%" height="20%">
                         @endif
-                        <a href="{{ route('album.show', ['id' => $album['id']]) }}">{{ $album['name'] }}</a>
-                        {{-- </a> --}}
-                        {{-- <br /> --}}
+                        {{-- <a href="/album/{{ $album['id'] }}">{{ $album['name'] }}</a> --}}
+                        <a href="{{ route('photo.index', ['album_id' => $album['id']]) }}">{{ $album['name'] }}</a>
+                        {{-- <a href="{{ route('album.show', ['id' => $album['id']]) }}">{{ $album['name'] }}</a> --}}
+                        <hr style="border:none;border-top:dashed 1px black;height:1px;width:300px;">
                     @endforeach
                 </div>
             </div>
