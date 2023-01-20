@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class Album extends Model
 {
@@ -18,6 +20,8 @@ class Album extends Model
     protected $fillable = [
         'name',
         'is_private',
+        'icon',
+        'extension',
     ];
 
     /**
@@ -48,7 +52,7 @@ class Album extends Model
     }
 
     /**
-     * 一覧取得
+     * 一件取得
      */
     public static function getOne($id)
     {
@@ -71,6 +75,25 @@ class Album extends Model
             $instance->is_private = $request->is_private;
             $instance->user_id = Auth::id();
             $instance->save();
+            if (isset($request->icon)) {
+                // 画像ファイル情報取得
+                $extension = pathinfo($_FILES['icon']['name'], PATHINFO_EXTENSION);
+                $instance->extension = $extension;
+
+                // 画像S3保存
+                $file = $request->file('icon');
+                $image_path = '/albums' . '/' . $instance['id'];
+                $image_name = 'icon' . '.' . $extension;
+                $icon_info = Storage::putFileAs(
+                    $image_path,
+                    $file,
+                    $image_name
+                );
+                $instance->icon = Storage::url($icon_info);
+            }
+            $instance->update();
+            // 二重送信防止
+            $request->session()->regenerateToken();
         }
     }
 }

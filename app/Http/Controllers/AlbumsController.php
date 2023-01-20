@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class AlbumsController extends Controller
 {
@@ -39,8 +41,9 @@ class AlbumsController extends Controller
      */
     public function store(Request $request)
     {
+        // 登録
         Album::upsert($request);
-        // redirect(route('album.index'));
+
         return redirect()->route('album.index');
     }
 

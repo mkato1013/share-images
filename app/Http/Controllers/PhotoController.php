@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 
 class PhotoController extends Controller
@@ -11,9 +13,15 @@ class PhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $album_id)
     {
-        return view('photo.index');
+        $album = Album::find($album_id);
+        $photos = Photo::getList($album_id);
+
+        return view('photo.index', [
+            'album' => $album,
+            'photos' => $photos,
+        ]);
     }
 
     /**
@@ -21,9 +29,12 @@ class PhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($album_id)
     {
-        //
+        $album = Album::find($album_id);
+        return view('photo.create', [
+            'album' => $album,
+        ]);
     }
 
     /**
@@ -32,9 +43,12 @@ class PhotoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $album_id)
     {
-        //
+        // 登録
+        Photo::upsert($request, $album_id);
+
+        return redirect()->route('photo.index', ['album_id' => $album_id]);
     }
 
     /**
@@ -43,9 +57,15 @@ class PhotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($album_id, $id)
     {
-        //
+        $album = Album::find($album_id);
+        $photo = Photo::getOne($id);
+
+        return view('photo.show', [
+            'album' => $album,
+            'photo' => $photo,
+        ]);
     }
 
     /**
