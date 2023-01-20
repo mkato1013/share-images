@@ -8,7 +8,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <form action="{{ route('photo.store', ['album_id' => $album['id']]) }}" method="post"
+            <form action="{{ route('albums.photos.store', ['album' => $album['id']]) }}" method="post"
                 enctype="multipart/form-data">
                 @csrf
                 <input type="text" name="name" maxlength=100 placeholder="name" style="width:50%;" />

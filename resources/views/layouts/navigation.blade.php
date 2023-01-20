@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     {{-- <a href="{{ route('dashboard') }}"> --}}
                     {{-- <a href="{{ route('top') }}"> --}}
-                    <a href="{{ route('album.index') }}">
+                    <a href="{{ route('albums.index') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
@@ -39,10 +39,10 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('album.index')">
+                        <x-dropdown-link :href="route('albums.index')">
                             {{ __('MyCreateAlbum') }}
                         </x-dropdown-link>
-                        <x-dropdown-link :href="route('album.index')">
+                        <x-dropdown-link :href="route('albums.index')">
                             {{ __('MyTeamAlbum') }}
                         </x-dropdown-link>
                         <x-dropdown-link :href="route('profile.edit')">

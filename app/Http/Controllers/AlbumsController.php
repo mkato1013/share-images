@@ -44,7 +44,7 @@ class AlbumsController extends Controller
         // 登録
         Album::upsert($request);
 
-        return redirect()->route('album.index');
+        return redirect()->route('albums.index');
     }
 
     /**

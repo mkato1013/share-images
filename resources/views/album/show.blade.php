@@ -4,7 +4,7 @@
             {{ __('Album') }}
         </h2>
         <h3 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{-- <a href="{{ route('photo.create') }}">{{ __('ImagePost') }}</a> --}}
+            {{-- <a href="{{ route('albums.photos.create') }}">{{ __('ImagePost') }}</a> --}}
         </h3>
     </x-slot>
 
