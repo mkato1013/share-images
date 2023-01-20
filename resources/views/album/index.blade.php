@@ -5,7 +5,7 @@
             {{ __('Albums') }}
         </h2>
         <h3 class="font-semibold text-xl text-gray-800 leading-tight">
-            <a href="{{ route('album.create') }}">{{ __('Create') }}</a>
+            <a href="{{ route('albums.create') }}">{{ __('Create') }}</a>
         </h3>
     </x-slot>
 
@@ -19,9 +19,7 @@
                         @else
                             <img src="{{ asset('image/noimage.jpeg') }}" alt="noimage" width="30%" height="20%">
                         @endif
-                        {{-- <a href="/album/{{ $album['id'] }}">{{ $album['name'] }}</a> --}}
-                        <a href="{{ route('photo.index', ['album_id' => $album['id']]) }}">{{ $album['name'] }}</a>
-                        {{-- <a href="{{ route('album.show', ['id' => $album['id']]) }}">{{ $album['name'] }}</a> --}}
+                        <a href="{{ route('albums.photos.index', ['album' => $album['id']]) }}">{{ $album['name'] }}</a>
                         <hr style="border:none;border-top:dashed 1px black;height:1px;width:300px;">
                     @endforeach
                 </div>

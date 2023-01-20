@@ -48,7 +48,7 @@ class PhotoController extends Controller
         // 登録
         Photo::upsert($request, $album_id);
 
-        return redirect()->route('photo.index', ['album_id' => $album_id]);
+        return redirect()->route('albums.photos.index', ['album' => $album_id]);
     }
 
     /**
@@ -57,13 +57,13 @@ class PhotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($album_id, $id)
+    public function show($id)
     {
-        $album = Album::find($album_id);
+        // $album = Album::find($album_id);
         $photo = Photo::getOne($id);
 
         return view('photo.show', [
-            'album' => $album,
+            // 'album' => $album,
             'photo' => $photo,
         ]);
     }

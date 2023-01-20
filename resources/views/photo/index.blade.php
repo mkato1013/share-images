@@ -5,7 +5,7 @@
         </h2>
         <h3 class="font-semibold text-xl text-gray-800 leading-tight">
             {{-- $photos[0]['album_id']]は投稿0の場合エラーがでるから修正する --}}
-            <a href="{{ route('photo.create', ['album_id' => $album['id']]) }}">{{ __('ImagePost') }}</a>
+            <a href="{{ route('albums.photos.create', ['album' => $album['id']]) }}">{{ __('ImagePost') }}</a>
         </h3>
     </x-slot>
 
@@ -20,7 +20,7 @@
                             <img src="{{ asset('image/noimage.jpeg') }}" alt="noimage" width="30%" height="20%">
                         @endif
                         <a
-                            href="{{ route('photo.show', ['album_id' => $album['id'], 'id' => $photo['id']]) }}">{{ $photo['name'] }}</a>
+                            href="{{ route('photos.show', ['photo' => $photo['id']]) }}">{{ $photo['name'] }}</a>
                         <hr style="border:none;border-top:dashed 1px black;height:1px;width:300px;">
                     @endforeach
                 </div>
