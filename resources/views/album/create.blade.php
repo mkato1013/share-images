@@ -27,14 +27,3 @@
         </div>
     </div>
 </x-app-layout>
-<script>
-    function checkSubmit() {
-        var btnSubmit = document.getElementById("btnSubmit");
-        if (btnSubmit.disabled) {
-            return false;
-        } else {
-            btnSubmit.disabled = true;
-            return true;
-        }
-    }
-</script>
