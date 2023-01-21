@@ -18,12 +18,21 @@ use Illuminate\Support\Facades\Route;
 
 // アルバム
 Route::get('/', [AlbumsController::class, 'index'])->name('albums.index'); // 一覧取得
-Route::resource('albums', AlbumsController::class)->except([
-    'index'
-]);
+Route::middleware('auth')->group(function () {
+    Route::resource('albums', AlbumsController::class)->except([
+        'index'
+    ]);
+});
 
 // フォト
-Route::resource('albums.photos', PhotoController::class)->shallow();
+Route::resource('albums.photos', PhotoController::class)->shallow()->only([
+    'index', 'show'
+]);
+Route::middleware('auth')->group(function () {
+    Route::resource('albums.photos', PhotoController::class)->shallow()->except([
+        'index', 'show'
+    ]);
+});
 
 // ユーザー情報
 Route::middleware('auth')->group(function () {
