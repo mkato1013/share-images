@@ -74,7 +74,7 @@ class Photo extends Model
      */
     public static function upsert($request, $album_id, $id = null)
     {
-        DB::transaction();
+        DB::beginTransaction();
         try {
             if ($id) {
                 // 更新
@@ -95,7 +95,7 @@ class Photo extends Model
 
                     // 画像S3保存
                     $file = $request->file('photo_img');
-                    $image_path = '/albums' . '/' . $album_id . '/photos' . '/' . $instance['id'];
+                    $image_path = config("app.env") . '/albums' . '/' . $album_id . '/photos' . '/' . $instance['id'];
                     $image_name = 'photo_img' . '.' . $extension;
                     $photo_img_info = Storage::putFileAs(
                         $image_path,

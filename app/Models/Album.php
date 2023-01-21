@@ -101,7 +101,7 @@ class Album extends Model
 
                     // 画像S3保存
                     $file = $request->file('icon');
-                    $image_path = '/albums' . '/' . $instance['id'];
+                    $image_path = config("app.env") . '/albums' . '/' . $instance['id'];
                     $image_name = 'icon' . '.' . $extension;
                     $icon_info = Storage::putFileAs(
                         $image_path,
