@@ -111,8 +111,6 @@ class Album extends Model
                     $instance->icon = Storage::url($icon_info);
                 }
                 $instance->update();
-                // 二重送信防止
-                $request->session()->regenerateToken();
             }
             DB::commit();
         } catch (\Exception $e) {

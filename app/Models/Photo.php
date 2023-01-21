@@ -105,8 +105,6 @@ class Photo extends Model
                     $instance->photo_img = Storage::url($photo_img_info);
                 }
                 $instance->update();
-                // 二重送信防止
-                $request->session()->regenerateToken();
             }
             DB::commit();
         } catch (\Exception $e) {
