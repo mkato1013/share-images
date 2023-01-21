@@ -8,8 +8,8 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <form action="{{ route('albums.photos.store', ['album' => $album['id']]) }}" method="post"
-                enctype="multipart/form-data">
+            <form action="{{ route('albums.photos.store', ['album' => $album['id']]) }}" id="form" method="post"
+                enctype="multipart/form-data" onsubmit="return checkSubmit();">
                 @csrf
                 <input type="text" name="name" maxlength=100 placeholder="name" style="width:50%;" />
                 <br />
@@ -25,7 +25,7 @@
                 IMAGE：<input type="file" name="photo_img">
                 <br />
                 <br />
-                <input type="submit" value="投稿">
+                <input type="submit" id="btnSubmit" value="投稿">
             </form>
         </div>
     </div>

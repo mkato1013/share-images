@@ -101,7 +101,7 @@ class Album extends Model
 
                     // 画像S3保存
                     $file = $request->file('icon');
-                    $image_path = '/albums' . '/' . $instance['id'];
+                    $image_path = config("app.env") . '/albums' . '/' . $instance['id'];
                     $image_name = 'icon' . '.' . $extension;
                     $icon_info = Storage::putFileAs(
                         $image_path,
@@ -111,8 +111,6 @@ class Album extends Model
                     $instance->icon = Storage::url($icon_info);
                 }
                 $instance->update();
-                // 二重送信防止
-                $request->session()->regenerateToken();
             }
             DB::commit();
         } catch (\Exception $e) {
