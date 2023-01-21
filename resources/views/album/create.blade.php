@@ -8,21 +8,33 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <form action="{{ route('albums.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('albums.store') }}" id="form" method="post" enctype="multipart/form-data"
+                onsubmit="return checkSubmit();">
                 @csrf
-                <input type="text" name="name" maxlength=100 placeholder="name" style="width:50%;"/>
-                <br/>
-                <br/>
+                <input type="text" name="name" maxlength=100 placeholder="name" style="width:50%;" />
+                <br />
+                <br />
                 {{-- valueで送る値を指定 --}}
-                <input type="radio" name="is_private" value=0 checked/> 公開
+                <input type="radio" name="is_private" value=0 checked /> 公開
                 <input type="radio" name="is_private" value=1 /> 非公開
-                <br/>
-                <br/>
+                <br />
+                <br />
                 アルバムアイコン：<input type="file" name="icon">
-                <br/>
-                <br/>
-                <input type="submit" value="作成">
+                <br />
+                <br />
+                <input type="submit" id="btnSubmit" value="作成">
             </form>
         </div>
     </div>
 </x-app-layout>
+<script>
+    function checkSubmit() {
+        var btnSubmit = document.getElementById("btnSubmit");
+        if (btnSubmit.disabled) {
+            return false;
+        } else {
+            btnSubmit.disabled = true;
+            return true;
+        }
+    }
+</script>
